@@ -1,0 +1,52 @@
+#objected relational mapping (ORM): This is the ability to create a SQL query using object-oriented programming language such as python.
+
+#Example 
+#create a customer model using ORM
+class Customer(models.Model):
+  name = models.charField(max_length = 100)
+  
+#create vehicle model with orm
+class vehicle(models.Model):
+  name = models.charField(max_length = 50)
+  vehicle_type = models.charField(max_length = 50)
+  description = models.textField(null=true, blank=true)
+  vehicle=models.ForeignKey(Customer, on_delete = models.CASCADE)
+
+#store customer name
+C= Customer.objects.create(name='john')
+<Customer:Customer.objects(2)>
+
+#another method to store customer information
+c1 = Customer(name = "bright")
+c1.save()
+
+#get the name of the customer with id=2
+c=Customer.objects.get(pk=2)
+c.name
+
+v1 = Vehicle.objects(name="Lamborghini", Customer = c1)
+v1.save()
+
+v = Vehicle.objects.get(FK=2)
+
+#Fetch model object
+#A QuerySet represents a collection of objects from your database. It represents a SELECT Query. To fetch all the objects, use all() method 
+
+lst = Customer.objects.all()
+[c.name for c in lst]
+
+#applying filter similar to WHERE clause
+vehicle.objects.filter(name="john")
+vehicle.objects.filter(name_startswith = "R")
+
+#Since the vehicle objects refers to the customer objects we can get the customer attributes using:
+v.Customer.name
+
+#Updating and removing a model object 
+c = Customer.object.get(name="john")
+c.name = "cecilia"
+c.save
+
+#Delete
+c = Customer.objects.get(pk=2)
+c.delete
